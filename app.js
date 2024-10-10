@@ -296,9 +296,91 @@ style.innerHTML = `
         border-color: #00ff9d;
     }
 `;
-
 // Append the style element to the head
 document.head.appendChild(style);
+
+// Add HTML dynamically
+document.body.innerHTML = `
+    <div class="togglebtn" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    <!-- Sidebar for navigation -->
+    <div class="sidebar" id="sidebar">
+        <button class="tab-button" onclick="openTab('overview')"><i class="fas fa-home"></i> Overview</button>
+        <button class="tab-button" onclick="openTab('history')"><i class="fas fa-history"></i> History</button>
+        <button class="tab-button" onclick="openTab('graphs')"><i class="fas fa-chart-line"></i> Graphs</button>
+        <button class="tab-button" onclick="openTab('logs')"><i class="fas fa-file-alt"></i> Logs</button>
+        <button class="tab-button" onclick="openTab('settings')"><i class="fas fa-cog fa-spin"></i> Settings</button>
+    </div>
+
+    <!-- Main content -->
+    <div class="content">
+        <!-- Overview Tab -->
+        <div id="overview" class="tab-content active">
+            <div id="live-counter-box" class="box">
+                <span class="icon"><i class="fas fa-hourglass-half fa-shake"></i></span>
+                <div id="connection-time">
+                    <span class="counter-section hidden" id="days">0d</span>
+                    <span class="counter-section hidden" id="hours">0h</span>
+                    <span class="counter-section hidden" id="minutes">0m</span>
+                    <span class="counter-section" id="seconds">0s</span>
+                </div>
+                <div id="total-connection-period" class="hidden">Total Connection Period: 0s</div>
+            </div>
+            
+            <div id="status-box" class="box">
+                <span class="icon"><i class="fas fa-wifi"></i></span>
+                <h1></h1>
+                <div id="status">Checking connection... <span id="status-badge" class="badge"></span></div>
+            </div>
+            <div id="ip-box" class="box"><i class="fas fa-network-wired"></i> IP Address: Retrieving...</div>
+            <div id="mac-box" class="box"><i class="fas fa-desktop"></i> MAC Address: Not available in browsers</div>
+        </div>
+
+        <!-- History Tab -->
+        <div id="history" class="tab-content">
+            <div id="disconnect-time" class="box"><i class="fas fa-plug"></i> Last Disconnected: --</div>
+            <div id="last-connection-time" class="box"><i class="fas fa-link"></i> Last Connected: --</div>
+            <div id="history-list" class="box">
+                <h2>Connection/Disconnection History</h2>
+                <ul id="history-log">
+                    <!-- History will be dynamically added here -->
+                </ul>
+            </div>
+        </div>
+
+        <!-- Graphs Tab -->
+        <div id="graphs" class="tab-content">
+            <div class="box">
+                <canvas id="bandwidthChart"></canvas>
+            </div>
+            <div class="box">
+                <canvas id="latencyChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Settings Tab -->
+        <div id="settings" class="tab-content">
+            <div class="box">
+                <h2>Settings</h2>
+                <p>Dark Mode:</p>
+                <div class="toggle-button" id="dark-mode-toggle">
+                    <div class="toggle-switch"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Logs Tab -->
+        <div id="logs" class="tab-content">
+            <div class="box">
+                <h2>Error/Debug Logs</h2>
+                <p>No errors logged yet.</p>
+            </div>
+        </div>
+    </div>
+`;
 
 let connectionStart;
 let connectionTimer;
